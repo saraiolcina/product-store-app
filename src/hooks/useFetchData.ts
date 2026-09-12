@@ -1,10 +1,15 @@
 import { useEffect, useState, useCallback, useRef } from "react";
 
-import { useProductsReturnType, Product, Status } from "../types/types";
+import {
+  useProductsReturnType,
+  Product,
+  Status,
+  ProductsResponse,
+} from "../types/types";
+
+const PRODUCTS_URL: string = "https://dummyjson.com/products";
 
 export const useProducts = (): useProductsReturnType => {
-  const url: string = "https://dummyjson.com/products";
-
   const [status, setStatus] = useState<Status>(Status.INITIAL);
   const [products, setProducts] = useState<Product[]>([]);
   const controllerRef = useRef<AbortController | null>(null);
@@ -17,12 +22,12 @@ export const useProducts = (): useProductsReturnType => {
     try {
       setStatus(Status.LOADING);
 
-      const response = await fetch(url, { signal: controller.signal });
+      const response = await fetch(PRODUCTS_URL, { signal: controller.signal });
       if (!response.ok) {
-        throw new Error(`An HTTP error ocurred: ${response.status}`);
+        throw new Error(`An HTTP error occurred: ${response.status}`);
       }
 
-      const responseData = await response.json();
+      const responseData: ProductsResponse = await response.json();
       if (!controller.signal.aborted) {
         setProducts(responseData.products);
         setStatus(Status.SUCCESS);

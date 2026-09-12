@@ -15,7 +15,7 @@ const media = {
 export const MainViewWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  font-family: Verdana;
+  font-family: Verdana, Geneva, sans-serif;
   font-size: 15px;
   padding: 15px;
   text-align: center;
@@ -68,4 +68,28 @@ export const ImageWrapper = styled.img`
 
 export const PriceWrapper = styled.p`
   font-weight: 600;
+`;
+
+export const PaginationWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  padding: 0px;
+`;
+
+export const PageButton = styled.button<{ $isActive: boolean }>`
+  background-color: ${(props) => (props.$isActive ? "#d2d8f7" : "transparent")};
+  padding: 8px 12px;
+  border: 1px solid gray;
+  color: black;
+  margin: 0 4px;
+  border-radius: 5px;
+`;
+
+export const ArrowButton = styled.button`
+  background-color: ${(props) => (props.disabled ? "#e4e6f0" : "transparent")};
+  color: ${(props) => (props.disabled ? "white" : "black")};
+  padding: 8px 12px;
+  border: 1px solid gray;
+  margin: 0 4px;
+  border-radius: 5px;
 `;

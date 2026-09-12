@@ -18,3 +18,10 @@ export type useProductsReturnType = {
   status: Status;
   refetch: () => Promise<void>;
 };
+
+export interface ProductsResponse {
+  products: Product[];
+  total: number;
+  skip: number;
+  limit: number;
+}
